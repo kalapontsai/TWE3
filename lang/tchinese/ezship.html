@@ -1,0 +1,91 @@
+{config_load file="$language/lang_$language.conf" section="ezship"} 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>{#title#} {$oID}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+
+<body>
+<table width="100%" border="0">
+  <tr> 
+    <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr> 
+          <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif">
+             <strong>{#text_order#}</strong>{$oID} <br>
+             <strong>{#text_total#}</strong>{$total} <br><br>
+	 {if $cID}<strong>{#text_cID#}</strong>{$cID} <br><br> {/if}
+             <strong>{#text_comment#}</strong>{$comments}
+            </font></td>
+        </tr>
+{if $rtn_message}<tr>
+          <td><font size="3" fontcolor="red" face="Verdana, Arial, Helvetica, sans-serif">{$rtn_message}</td>
+        </tr>{/if}
+      </table>
+      <br>
+       <table style="border-top:1px solid; border-bottom:1px solid;" width="100%" border="0">
+        <tr bgcolor="#f1f1f1"> 
+          <td> 
+            <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif">
+            <strong>{#text_shipping_address#}</strong></p><br>
+            {$address_label_shipping} </font>
+          </td>
+        </tr>
+      </table>
+      <p>&nbsp;</p></td>
+  <tr>
+    <td><table style="border-top:1px solid; border-bottom:1px solid;" width="100%" border="0">
+        <tr>
+          <td> 
+            <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><strong>
+              {#text_comments_history#}
+            </strong><br>
+          </font></p></td>
+        </tr>
+      {foreach name=aussen item=order_comments_values from=$orders_history_comment}
+        <tr>
+          <td>
+            <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif">
+              {$order_comments_values.date_added}
+            </font></p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif">
+              {$order_comments_values.comments}
+            </font></p>
+          </td>
+        </tr>{/foreach}
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align=left>
+      <table style="border-top:1px solid; border-bottom:1px solid;" width="60%" border="0">
+        <tr>
+          <td colspan="3"><a href="http://map.ezship.com.tw/ezship_map_web.jsp?su_ID=service@elhomeo.com&process_ID={$oID}&rtURL=http://shop.elhomeo.com/admin/ezship.php">EZSHIP店號查詢</a></td>
+        </tr>
+        <tr>
+          <td><form name="auto_store" action="http://www.ezship.com.tw/emap/ezship_request_order_api.jsp" method="post">
+          <input type="hidden" name="su_id" value="service@elhomeo.com">
+          <input type="hidden" name="order_id' value="{$oID}">
+          <input type="hidden" name="order_type" value="3">
+          <input type="hidden" name="order_amount" value="0">
+          <input type="hidden" name="rv_name" value="iconv("UTF-8", "Big5",{$rv_name})">
+          <input type="hidden" name="rv_email" value="{$email}">
+          <input type="hidden" name="rv_mobil" value="{$rv_mobil}">
+          <input type="hidden" name="rtn_url" value="http://shop.elhomeo.com/admin/ezship.php">
+          <input type="hidden" name="web_para" value="{$cID}">
+          <INPUT type="text" name="order_status" size="6" value="A01"></td>
+          <td><INPUT type="text" name="st_code" size="20" value="TFM*****"></td>
+          <td><input name="submit" value="{#text_auto_store#}" type="submit"></form></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

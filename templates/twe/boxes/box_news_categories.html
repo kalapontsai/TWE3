@@ -1,0 +1,52 @@
+{config_load file="$language/lang_$language.conf" section="boxes"} 
+{literal}
+<script language="javascript"><!--
+var selected;
+
+function selectRowEffect(object, buttonSelect) {
+  if (!selected) {
+    if (document.getElementById) {
+      selected = document.getElementById('defaultSelected');
+    } else {
+      selected = document.all['defaultSelected'];
+    }
+  }
+
+  if (selected) selected.className = 'moduleRow';
+  object.className = 'moduleRowSelected';
+  selected = object;
+
+// one button is not an array
+  if (document.checkout_payment.payment[0]) {
+    document.checkout_payment.payment[buttonSelect].checked=true;
+  } else {
+    document.checkout_payment.payment.checked=true;
+  }
+}
+
+function rowOverEffect(object) {
+  if (object.className == 'moduleRow') object.className = 'moduleRowOver';
+}
+
+function rowOutEffect(object) {
+  if (object.className == 'moduleRowOver') object.className = 'moduleRow';
+}
+//--></script>
+{/literal}
+<div id="content">
+<div class="content">
+    <div id="boxesbox">
+       <div id="boxestab">
+        <ul>
+          <li id="boxescurrent"><a href=" ">{#heading_news_categories#}</a></li>
+        </ul>
+      </div>
+      <div id="boxeswrap">
+      <table width="100%"  border="0" cellpadding="2" cellspacing="0"  class="infoBoxContents">
+        <tr>
+          <td class="boxText">{$BOX_CONTENT}</td>
+        </tr>
+    </table></div>
+</div>
+</div>
+</div>

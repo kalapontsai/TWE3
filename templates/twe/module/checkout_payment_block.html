@@ -1,0 +1,56 @@
+{literal}
+<script type="text/javascript">
+
+$(document).ready(function () {
+$('.paymentblock tr:has(":checked")').addClass("bg-success");	
+
+    $('.paymentblock').click(function (event) {
+        if (event.target.type !== 'radio') {
+            $(':radio', this).trigger('click');
+        }
+    });
+$('.paymentblock').on('change', ':radio', function(e) {
+	
+	$('.paymentblock tr').removeClass("bg-success");
+	if($(this).is(':checked'))$(this).closest('tr').addClass("bg-success");
+	});
+});
+</script>
+{/literal}
+{foreach name=aussen item=module_data from=$module_content} 
+<table class="paymentblock" width="100%" border="0" cellspacing="0" cellpadding="6">
+  <tr style="line-height:40px;">
+    <td style="padding-left:10px;padding-right:10px" class="header" width="1%">{$module_data.selection}</td>
+    <td style="padding-left:10px" class="header" width="89%">{$module_data.module}</td>
+    <td style="padding-right:10px" class="header" width="10%">{$module_data.module_cost}</td>
+  </tr>
+  {if $module_data.description!=''}
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan="2" width="100%"><strong>{$module_data.description}</strong></td>
+  </tr>
+  {/if}
+  {if $module_data.error!=''}
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan="2">{$module_data.error}</td>
+  </tr>
+  {elseif $module_data.fields}
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan="2">
+		<table border="0" cellspacing="0" cellpadding="0">
+		{foreach name=aussen item=method_data from=$module_data.fields} 
+			<tr>
+				<td>{$method_data.title}</td>
+				<td>&nbsp;</td>
+				<td>{$method_data.field}</td>
+				<td>&nbsp;</td>
+			 </tr>
+		{/foreach}
+		</table>
+    </td>
+  </tr>
+  {/if}
+</table>
+{/foreach}

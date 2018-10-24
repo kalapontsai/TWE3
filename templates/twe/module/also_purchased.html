@@ -1,0 +1,14 @@
+<div class="row">
+{foreach name=aussen item=module_data from=$module_content}
+  <div class="col-xs-12 col-sm-{php}echo (12 / MAX_DISPLAY_PRODUCTS_PER_ROW);{/php} col-md-{php}echo (12 / MAX_DISPLAY_PRODUCTS_PER_ROW);{/php}"  style="padding-top:10px">    <div class="thumbnail">
+      {if $module_data.PRODUCTS_IMAGE}<a href="{$module_data.PRODUCTS_LINK}"><img data-src="holder.js/300x300" src="{$module_data.PRODUCTS_IMAGE}" border="0"></a>{/if}
+      <div class="caption">
+        <h4 style="height:40px"><strong><a href="{$module_data.PRODUCTS_LINK}">{$module_data.PRODUCTS_NAME}</a></strong></h4>
+        {if $module_data.PRODUCTS_DESCRIPTION}<p>{$module_data.PRODUCTS_DESCRIPTION}</p>{/if}
+        {if $module_data.PRODUCTS_PRICE}<p><b>{$module_data.PRODUCTS_PRICE}</b></p>{/if}
+        {if $module_data.BUTTON_BUY_NOW}<p>{$module_data.BUTTON_BUY_NOW}</p>{/if}
+      </div>
+    </div>
+  </div>
+  {/foreach}
+</div>

@@ -1,0 +1,60 @@
+{config_load file="$language/lang_$language.conf" section="index"}
+{$MODULE_error}
+{if $DEFAULT_TYPE == 'default'}
+{if $center_center}
+{foreach name=aussen item=box_data from=$center_center}<div class="row">
+<div class="col-md-12">
+	{eval var=$box_data.BOXES}
+    </div></div>
+{/foreach} 
+{/if}
+{if $center_left || $center_right}
+<div class="row-fluid">
+  {if $center_left}
+<div class="col-md-6">
+  {foreach name=aussen item=box_data from=$center_left}
+	{eval var=$box_data.BOXES}
+  {/foreach}
+</div>
+{/if}
+	{if $center_right}   
+    <div class="col-md-6">
+  {foreach name=aussen item=box_data from=$center_right}
+	{eval var=$box_data.BOXES}    
+ 
+  {/foreach}
+   </div>
+  {/if}
+</div> 
+  {/if}
+{if $center_center_down}
+<div class="row-fluid">
+<div class="col-md-12">
+{foreach name=aussen item=box_data from=$center_center_down}
+	{eval var=$box_data.BOXES}
+{/foreach}
+</div>
+</div> 
+{/if}
+
+{/if} 
+
+{if $DEFAULT_TYPE == 'tabbed'}
+<div class="col-md-12">{if $shop_content}{$shop_content}{/if}{if $center_news}<p>{$center_news}</p>{/if}
+    </div>
+{*BEGIN TABS*}
+<div class="col-md-12">
+<div id="tabbed_index">
+<ul>
+{foreach name=aussen item=box_data from=$TABBED}
+	<li><a href="#{eval var=$box_data.BOXES_NAME_TITLE}"  class="{$box_data.BOXES_NAME_TITLE}">{eval var=$box_data.BOXES_TITLE}</a></li>
+{/foreach} 
+	</ul>
+{foreach name=aussen item=box_data from=$TABBED}	
+   <div id="{eval var=$box_data.BOXES_NAME_TITLE}"></div>
+{/foreach}
+</div>
+</div>
+{*END TABS*}
+ 
+{/if}

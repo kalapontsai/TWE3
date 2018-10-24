@@ -1,0 +1,50 @@
+{literal}
+<script type="text/javascript">
+
+$(document).ready(function () {
+$('.shippingblock tr:has(":checked")').addClass("bg-success");	
+    $('.shippingblock').click(function (event) {
+        if (event.target.type !== 'radio') {
+            $(':radio', this).trigger('click');
+        }
+    });
+$('.shippingblock').on('change', ':radio', function(e) {
+	$('.shippingblock tr').removeClass("bg-success");
+	if($(this).is(':checked'))$(this).closest('tr').addClass("bg-success");
+	});
+});
+</script>
+{/literal}
+{if $FREE_SHIPPING} 
+<table class="shippingblock" border="0" width="100%" cellspacing="0" cellpadding="6">
+	<tr> 
+		<td class="header"><strong>{$FREE_SHIPPING_TITLE}</strong></td>
+	</tr>
+	<tr> 
+		<td width="100%">{$FREE_SHIPPING_DESCRIPTION}</td>
+	</tr>
+</table>
+{else}
+{foreach name=aussen item=module_data from=$module_content} 
+<table class="shippingblock" width="100%" border="0" cellspacing="0" cellpadding="6">
+  <tr>
+    <td colspan="3" class="header"><strong>{$module_data.module}</strong></td>
+  </tr>
+  {if $module_data.error != ''}
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan="2">{$module_data.error}</td>
+  </tr>
+  {else}
+  {foreach name=aussen item=method_data from=$module_data.methods} 
+  <tr style="line-height:40px;">
+    <td width="50" style="padding-left:10px" class="radiobutton">{$method_data.radio_field}</td>
+    <td class="description">{$method_data.title}</td>
+    <td align="left" style="padding-right:10px" class="price">{$method_data.price}</td>
+  </tr>
+  {/foreach}
+  </table>
+  {/if}
+{/foreach}
+
+{/if}

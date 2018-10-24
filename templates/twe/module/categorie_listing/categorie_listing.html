@@ -1,0 +1,62 @@
+{config_load file="$language/lang_$language.conf" section="categorie_listing"}
+<div id="infocontent">
+  <div class="infocontent">
+    <div id="infobox">
+       <div id="infotab">
+        <ul>
+          <li id="infocurrent"><a><h4><b>{$CATEGORIES_NAME}<b></h4></a></li>
+        </ul>
+      </div>
+     <div id="infowrap">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top"> 
+    <td class="main"> <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr valign="top">          
+          <td align="right">{if $CATEGORIES_IMAGE}<div class="thumbnail"><img data-src="holder.js/80x80" src="{$CATEGORIES_IMAGE}"></div>{/if}</td>
+        </tr>
+      </table>{if $CATEGORIES_DESCRIPTION}
+      {$CATEGORIES_DESCRIPTION} 
+      <br>
+      <br>
+	  {/if}
+      {if $module_content !=''} <strong>{#heading_more_categories#}</strong> 
+      <br>
+      <table style="border-top: 1px solid; border-color: #d4d4d4;" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> {foreach name=aussen item=module_data from=$module_content} 
+		{php} 
+          $col++; 
+		{/php} 
+          <td class="main"><div align="left"> 
+              <table  width="100%" border="0" cellpadding="0" cellspacing="4">
+                <tr> 
+                  {if $module_data.CATEGORIES_IMAGE}<td class="thumbnail" rowspan="2" ><a href="{$module_data.CATEGORIES_LINK}"><img data-src="holder.js/80x80" src="{$module_data.CATEGORIES_IMAGE}" border="0"></a></td>{/if}
+                  <td class="main"><strong><a href="{$module_data.CATEGORIES_LINK}">{$module_data.CATEGORIES_NAME}</a></strong></td>
+                </tr>
+                <tr> 
+                  <td  class="main">{$module_data.CATEGORIES_DESCRIPTION}</td>
+                </tr>
+              </table>
+            </div></td>
+          {php} 
+		  if ($col>=MAX_DISPLAY_CATEGORIES_PER_ROW) { 
+		  $col=0; 
+		  echo '</tr><tr>';
+		   } 
+		  {/php} 
+		 {/foreach} </tr>
+      </table> 
+       {/if} <br>
+    </td>
+    <td class="main" nowrap width="1%">&nbsp; </td>
+  </tr>
+</table>
+<br><hr />
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>{$MODULE_new_products}</td>
+  </tr>
+</table>
+</div>
+</div>
+</div>
+</div>

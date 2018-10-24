@@ -1,0 +1,121 @@
+{config_load file="$language/lang_$language.conf" section="ezship"} 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>{#title#} {$oID}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script language="JavaScript" type="text/javascript" src="../includes/ezship.js"></script>
+<body onLoad="shop();">
+<table width="100%" border="0">
+  <tr> 
+    <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr> 
+          <td>
+             <strong>{#text_order#}</strong>{$oID} <br>
+             <strong>{#text_total#}</strong>{$total} <br><br>
+	 {if $cID}<strong>{#text_cID#}</strong>{$cID} <br><br> {/if}
+             <strong>{#text_comment#}</strong>{$comments}
+          </td>
+        </tr>
+{if $rtn_message}<tr>
+          <td><H3><font fontcolor="red">{$rtn_message} </H3></td>
+        </tr>{/if}
+      </table>
+      <br>
+       <table width="100%" border="0">
+        <tr> 
+          <td> 
+            <p><strong>{#text_shipping_address#} </strong></p><br>
+            {$address_label_shipping} </font>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <table width="100%" border="0">
+        <tr>
+          <td> 
+            <p><strong>
+              {#text_comments_history#}
+            </strong></p>
+          </td>
+        </tr>
+      {foreach name=aussen item=order_comments_values from=$orders_history_comment}
+        <tr>
+          <td>
+            {$order_comments_values.date_added}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>{$order_comments_values.comments} </p>
+          </td>
+        </tr>{/foreach}
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align=left>
+      <table width="80%" border="1">
+        <tr align="center">
+          <td colspan="3"><a href="http://map.ezship.com.tw/ezship_map_web.jsp?su_ID=service@elhomeo.com&rtURL=http://shop.elhomeo.com/admin/ezship.php&webPara={$oID}">EZSHIP店號查詢</a></td>
+        </tr>
+        <form name="ez_para" action="http://www.ezship.com.tw/emap/ezship_request_order_api.jsp" method="post">
+              <input type="hidden" name="su_id" value="service@elhomeo.com">
+              <input type="hidden" name="order_id" value="{$oID}">
+              <input type="hidden" name="rv_name" value="{$rv_name}">
+              <input type="hidden" name="rv_email" value="{$email}">
+              <input type="hidden" name="rv_mobile" value="{$rv_mobil}">
+              <input type="hidden" name="web_para" value="{$cID}">
+              <input type="hidden" name="rtn_url" value="http://shop.elhomeo.com/admin/ezship.php">
+        <tr align="center" bgcolor="#CCCC66">
+          <td colspan="3">金額&nbsp;:&nbsp;<input id="order_amount" type="text" name="order_amount" value="{$total}" size="10">{if $ttl_message}<font color="red">&nbsp;&nbsp;{$ttl_message}</font>{/if}</td>
+        </tr>
+        <tr align="center" bgcolor="#F0F8FF">
+          <td colspan="2">
+            <p>店到店</p>
+          </td>
+          <td>
+            <p>店到宅</p>
+          </td>
+        </tr>
+        <tr align="center" bgcolor="#F0F8FF">
+          <td width="30%">
+              <input type="radio" name="order_status" value="A01" onclick="shop()" checked>超商取貨
+              
+          </td>
+          <td width="30%">                                                                   
+              <input type="radio" name="order_status" value="A03" onclick="shop()">超商取貨(輕鬆袋)
+          </td>
+          <td>                                                                   
+              <input type="radio" name="order_status" value="A05" onclick="door()">宅配
+          </td>
+        </tr>
+        <tr align="center" bgcolor="#FFFFE0">
+          <td colspan="3">
+              <input type="radio" name="order_type" value="1">取貨付款&nbsp;&nbsp;
+              <input type="radio" name="order_type" value="3" checked>純取貨
+          </td>
+        </tr>
+        <tr bgcolor="#FFFFE0">
+          <td align="center"><div id="st_code_title">(超商取貨必填)&nbsp;店號:</div></td>
+          <td colspan="2"><input id="st_code" type="text" name="st_code" value="{$st_cate_code}" placeholder="體系+店號(ex:TMF9999)" size="20"></td>
+        </tr>
+        <tr bgcolor="#FFFFE0">
+          <td align="center"><div id="rv_addr_title">(宅配必填)&nbsp;收貨地址:<br>(宅配必填)&nbsp;郵遞區號:</div></td>
+              <td colspan="2"><input id="rv_addr" type="text" name="rv_addr" value="{$address_rv_addr}" placeholder="完整地址" size="60"><br>
+              <input id="rv_zip" type="text" name="rv_zip" value="{$rv_zip}" placeholder="郵遞區號" size="10"></td>
+        </tr>
+        <tr align="center">
+          <td colspan="3">
+              <input name="submit" value="送 出" type="submit"></form>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

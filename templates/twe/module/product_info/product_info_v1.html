@@ -1,0 +1,114 @@
+{config_load file="$language/lang_$language.conf" section="product_info"}
+{literal}
+<script language="javascript"><!--
+function popupWindow(url) {
+  window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=100,height=100,screenX=150,screenY=150,top=150,left=150')
+}  
+//--></script>
+{/literal}
+<div id="infocontent">
+  <div class="infocontent">
+    <div id="infobox">
+       <div id="infotab">
+        <ul>
+          <li id="infocurrent"><a><font color="#666666" size="+1"><strong>{$PRODUCTS_NAME}</strong></font></a></li>
+        </ul>
+      </div>
+     <div id="infowrap">
+{$PRODUCT_NAVIGATOR}
+<form class="form-inline" role="form" name="cart_quantity" action="{$FORM_ACTION}" method="post">
+
+<div id="productsInfo"  style="margin-top:20px">
+<div id="productinfowrap">
+   
+<div class="product-info">
+ <div class="row-fluid">
+<div class="col-sm-12 col-md-12">
+       <div class="row">
+       <div class="col-sm-12 col-md-12">
+       {if $PRODUCTS_IMAGE!=''}<div class="image thumbnail"><a title="{$PRODUCTS_NAME}" href="{$PRODUCTS_IMAGE|replace:"info_images":"popup_images"}"  class="thickbox"><img data-src="holder.js/100%x300" src="{$PRODUCTS_IMAGE}" name=swap1 oSrc="{$PRODUCTS_IMAGE}" alt="{$PRODUCTS_NAME}" class="productimage" border="0" /></a>
+       </div>{/if}
+       </div>
+       </div>
+       
+        {if $MORE_IMG =='true'}
+          <div class="row-fluid hidden-xs">
+          <div id="owl-producst-info" class="owl-carousel">
+      {foreach name=aussen item=module_data from=$module_content}
+      <div class="thumbnail">
+          <a onmouseover="MM_swapImage('swap1','','{$module_data.PRODUCTS_IMAGE_MORE}',1)" title="{$module_data.PRODUCTS_NAME}"  href="{$module_data.PRODUCTS_IMAGE_MORE|replace:"info_images":"popup_images"}" class="thickbox "><img data-src="holder.js/80x80" alt="{$module_data.PRODUCTS_NAME}" src="{$module_data.PRODUCTS_BUTTON_MORE}"  border=0 ></a>
+         </div> 
+        {/foreach} 
+        </div> 
+        </div>
+      {/if}      
+</div><!--class="col-md-3" -->
+<div class="col-sm-6 col-md-8"><div class="qrcode text-right" id="qrcodeholder"></div>
+<div class="table">
+<h4><strong>{$PRODUCTS_PRICE}</strong></h4>
+{if $PRODUCTS_MODEL!=''}<h4><span class="label label-info">{#model#}</span> {$PRODUCTS_MODEL}</h4>{/if}
+    {if $PRODUCTS_DISCOUNT!=''}<h4><span class="label label-info">{#text_discount#}:</span> {$PRODUCTS_DISCOUNT}</h4>{/if}
+    {if $SHIPPING_NAME}<h4><span class="shippingtime"><span class="label label-info">{#text_shippingtime#}</span>{if $SHIPPING_IMAGE}<img src="{$SHIPPING_IMAGE}" alt="{$SHIPPING_NAME}" />{/if} {$SHIPPING_NAME}</span></h4>{/if}
+    <h4><span class="label label-info">{#print#}:</span> {$PRODUCTS_PRINT}</h4>
+ {if $SHOW_POINTS_PRICE}{$SHOW_POINTS_PRICE}{/if} 
+ </div>  
+{if $PRODUCTS_FSK18=='true'}<img src="{$tpl_path}img/fsk18.gif">{/if}
+{if $MODULE_graduated_price}<span class="options">{$MODULE_graduated_price}</span>{/if}
+{if $MODULE_product_options !=''}<p><div class="productoptions">{$MODULE_product_options}</div></p>{/if}
+</div>
+</div>
+<div class="row">
+<div class="col-md-12">
+  <div class="form-inline text-left">
+  <div class="col-xs-12 col-sm-8 col-md-8 text-right">{if $ADD_QTY}{$ADD_QTY}{/if}</div>
+  <div class="col-xs-12 col-sm-4 col-md-4 text-right btn_info_replace">{$ADD_CART_BUTTON}</div>
+  </div>
+</div>
+ </div>
+</div>
+</div>
+</div>
+{*BEGIN TABS*}
+<div id="tabbed_info" style="margin-top:20px">
+<ul>
+	{if $PRODUCTS_DESCRIPTION !=''}<li><a href="#tab_description">{#description#}</a></li>{/if}
+	{if $MODULE_also_purchased != ''}<li><a href="#tab_also_purchased">{#also_purchased#}</a></li>{/if}
+	{if $MODULE_products_reviews != ''}<li><a href="#tab_reviews">{#products_reviews#}</a></li>{/if}
+	{if $MODULE_products_media != ''}<li><a href="#tab_media">{#products_media#}</a></li>{/if}
+</ul>
+{if $PRODUCTS_DESCRIPTION !=''}<div id="tab_description">{$PRODUCTS_DESCRIPTION}</div>{/if}
+{if $MODULE_products_media != ''}<div id="tab_media">{$MODULE_products_media}</div>{/if}
+{if $MODULE_products_reviews != ''}<div id="tab_reviews">{$MODULE_products_reviews}</div>{/if}
+{if $MODULE_also_purchased != ''}<div id="tab_also_purchased">{$MODULE_also_purchased}</div>{/if}
+</div>
+{*END TABS*}
+<br />
+{if $PRODUCTS_URL != ''} 
+<table width="100%" border="0" bgcolor="#EEEEEE">
+  <tr> 
+    <td><p align="center"><font size="2">{$PRODUCTS_URL}
+        </font></p></td>
+  </tr>
+</table>
+{/if}
+{if $PRODUCTS_DATE_AVIABLE != ''} 
+<table width="100%" border="0" bgcolor="#EEEEEE">
+  <tr> 
+    <td><p align="center"><font size="2"> 
+        {$PRODUCTS_DATE_AVIABLE}</font></p></td>
+  </tr>
+</table>
+{/if} 
+{if $PRODUCTS_ADDED != ''} 
+<table width="100%" border="0" bgcolor="#EEEEEE">
+  <tr> 
+    <td><p align="center"><font size="2"> 
+        {$PRODUCTS_ADDED}</font></p></td>
+  </tr>
+</table>
+{/if}
+</form>
+</div>
+</div>
+</div>
+</div>

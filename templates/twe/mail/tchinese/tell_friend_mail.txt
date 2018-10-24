@@ -1,0 +1,14 @@
+您好,這是 {$from_name} 提供給您的訊息
+若以下資訊對您造成困擾，請忽略或通知我們為您處理。
+
+-----------------------------------
+{$message}
+
+參觀推薦商品,請按下:{$PRODUCTS_LINK}
+
+-----------------------------------
+艾沙順勢糖球屋
+mailto:service@elhomeo.com
+網    址 https://www.elhomeo.com
+討論區 https://forum.elhomeo.com
+購物車 https://shop.elhomeo.com

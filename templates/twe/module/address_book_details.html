@@ -1,0 +1,131 @@
+{config_load file="$language/lang_$language.conf" section="address_book_process"}
+{literal}
+<script type="text/javascript">
+$(function() {
+$(".noplay").each(function() {
+         $(this).hide();
+     }); 	
+if($("#use_exp").prop("checked"))
+   {
+     $(".play").each(function() {
+         $(this).hide();
+     });
+	 $(".noplay").each(function() {
+         $(this).show();
+     }); 
+   }	
+$("#use_exp").click(function() {
+ 
+   if($("#use_exp").prop("checked"))
+   {
+     $(".play").each(function() {
+         $(this).hide();
+     });
+	 $(".noplay").each(function() {
+         $(this).show();
+     }); 
+   }
+   else
+   {
+     $(".play").each(function() {
+         $(this).show();
+     }); 
+	 $(".noplay").each(function() {
+         $(this).hide();
+     });          
+   }
+});
+})
+</script>
+{/literal}
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr> 
+    <td class="main"><strong>{#title_address#}</strong> </td>
+    <td><div align="right"><font color="#FF0000" size="1" face="Verdana, Arial, Helvetica, sans-serif">{#text_must#}</font></div></td>
+  </tr>
+</table>
+<br />
+<table class="formArea" width="100%" border="0" cellspacing="5" cellpadding="0">
+  {if $gender=='1'} 
+  <tr class="play"> 
+    <td class="main" width="20%">{#text_gender#}</td>
+    <td class="main"><label>{#text_male#}{$INPUT_MALE}</label><label>{#text_female#} {$INPUT_FEMALE}</label></td>
+  </tr>
+  {/if} 
+  <tr> 
+    <td class="main" width="20%"></td>
+    <td class="main"><label>{$CHECKBOX_USE_EXP} <font color=blue>{#text_use_exp#}</font></label></td>
+  </tr>
+  <tr> 
+    <td class="main" width="20%">{#text_firstname#}</td>
+    <td class="main" >{$INPUT_FIRSTNAME}</td>
+  </tr>
+  <tr class="play"> 
+    <td class="main">{#text_lastname#}</td>
+    <td class="main">{$INPUT_LASTNAME}</td>
+  </tr>
+  {if $company=='1'}   
+  <tr class="play"> 
+    <td class="main" width="20%">{#text_company#}<br> </td>
+    <td class="main">{$INPUT_COMPANY}</td>
+  </tr>
+  {/if} 
+ <tr class="play"> 
+    <td class="main" width="20%">{#text_country#}</td>
+    <td class="main">{$SELECT_COUNTRY}</td>
+  </tr>
+  {if $state=='1'} 
+  <tr class="play"> 
+    <td class="main" width="20%">{#text_state#}</td>
+    <td class="main">{$INPUT_STATE}</td>
+  </tr>
+  {/if} 
+   <tr class="play"> 
+    <td class="main" width="20%">{#text_city#}</td>
+    <td class="main">{$INPUT_CITY}</td>
+  </tr>
+  <tr class="play"> 
+    <td class="main" width="20%">{#text_code#}</td>
+    <td class="main">{$INPUT_CODE}</td>
+  </tr>
+   {if $suburb=='1'} 
+  <tr class="play"> 
+    <td class="main" width="20%">{#text_suburb#}</td>
+    <td class="main">{$INPUT_SUBURB}</td>
+  </tr>
+  {/if} 
+  <tr class="play"> 
+    <td class="main" width="20%">{#text_street#}</td>
+    <td class="main" >{$INPUT_STREET}</td>
+  </tr>
+  <tr class="play"> 
+    <td class="main" width="20%">{#text_telephone#}</td>
+    <td class="main" >{$INPUT_TEL}</td>
+  </tr>
+<tr> 
+    <td class="main" width="20%">{#text_fax#}</td>
+    <td class="main" >{$INPUT_FAX}</td>
+  </tr>
+  
+   <tr class="noplay"> 
+    <td class="notelink" colspan="2">{#text_exp_type_title#}&nbsp;<a href={#text_exp_type_1_link#} target=_blank>{#text_exp_type_1#}</a>&nbsp;&nbsp;<a href={#text_exp_type_2_link#} target=_blank>{#text_exp_type_2#}</a></td>
+  </tr>
+   <tr class="noplay"> 
+    <td class="main">{#text_exp_type#}</td>
+    <td class="main">{$SELECT_EXP_TYPE}<font color="#FF0000">*</font></td>
+  </tr>  
+   <tr class="noplay"> 
+    <td class="main">{#text_exp_title#}</td>
+    <td class="main">{$INPUT_EXP_TITLE}<font color="#FF0000">*</font></td>
+  </tr>  
+   <tr class="noplay"> 
+    <td class="main">{#text_exp_number#}</td>
+    <td class="main">{$INPUT_EXP_NUMBER}<font color="#FF0000">*</font></td>
+  </tr>  
+  {if $new=='1'}
+  <tr>
+    <td class="main" width="20%">&nbsp;</td>
+    <td class="main">{$CHECKBOX_PRIMARY} {#text_standard#}</td>
+  </tr>
+  {/if}
+</table>

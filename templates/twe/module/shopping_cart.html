@@ -1,0 +1,52 @@
+{config_load file="$language/lang_$language.conf" section="shopping_cart"}
+<div id="infocontent">
+  <div class="infocontent">
+    <div id="infobox">
+       <div id="infotab">
+        <ul>
+          <li id="infocurrent"><a>{#heading_cart#}</a></li>
+        </ul>
+      </div>
+     <div id="infowrap">
+{$MODULE_gift_cart}
+{if $info_message!=''}
+<br>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="main" style="border: 1px solid; border-color: #ff0000;" bgcolor="#FFCCCC"><div align="center">{$info_message}</div></td>
+  </tr>
+</table>
+<br>
+{/if}
+  {if $cart_empty==true}
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr> 
+    <td class="main"><div align="center"><h3>{#text_empty#}</h3></div></td>
+  </tr>
+  <tr>
+    <td class="main"><div class="btnreplace text-right">{$BUTTON_CONTINUE}</div></td>
+  </tr>
+</table>
+{else}
+{$FORM_ACTION}
+{$HIDDEN_OPTIONS}
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>{$checkout_cart}</td>
+  </tr>
+  <tr>
+    <td style="border-top:solid #CCC 1px" align="right">{$cartTotal}{$button_update_cart}</td>
+  </tr>
+    </table>
+    <br />
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+	<td><div class="btnreplace">{$BUTTON_CHECKOUT}</div></td>
+  </tr>
+</table>
+</form>
+{/if}
+</div>
+</div>
+</div>
+</div>

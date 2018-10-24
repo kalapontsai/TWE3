@@ -1,0 +1,105 @@
+{config_load file="$language/lang_$language.conf" section="boxes"} 
+{literal}
+<script language="javascript"><!--
+function popupWindow(url) {
+  window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=100,height=100,screenX=150,screenY=150,top=150,left=150')
+}  
+//--></script>
+{/literal}
+{if $deny_cart neq 'true'}
+{if $empty=='false'}
+<div id="content">
+<div class="content">
+    <div id="boxesbox">
+       <div id="boxestab">
+        <ul>
+          <li id="boxescurrent"><a href=" ">{#heading_cart#}</a></li>
+        </ul>
+      </div>
+      <div id="boxeswrap">
+ <div id="finalProducts">      
+<table border="0" width="100%" cellspacing="0" cellpadding="3" class="infoBoxContents">
+            <tr>
+              <td style="border-bottom: 1px solid; border-color: #cccccc;" align="left" class="boxText">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        {foreach name=aussen item=products_data from=$products}
+          <tr>
+          {if $products_data.IMAGE!=''}<td width="50">{$products_data.IMAGE}</td>{/if}
+            <td class="main" ><a href="{$LINK_CART}">{$products_data.NAME}</a>x&nbsp;{$products_data.QTY}</td>
+            <td align="right">{$products_data.DEL}</td>
+          </tr>
+        {/foreach}
+              </table></td>
+            </tr>
+            <tr>
+              <td><div align="right">{if $DISCOUNT}<font color="#FF0000"><strong>{#text_discount#}</strong>{$DISCOUNT}</font><br>
+        {/if} <strong>{#text_total#}</strong><h4>{$TOTAL}</h4></div></td>
+            </tr>
+          </table>
+          <div class="text-center"><a href="{php} echo twe_href_link(FILENAME_SHOPPING_CART, '', 'SSL'){/php}" class="button-s btn-block">{php} echo NAVBAR_TITLE_SHOPPING_CART;{/php}</a><a href="{php} echo twe_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'){/php}" class="button-a btn-block">{php} echo IMAGE_BUTTON_CHECKOUT;{/php}</a></div>
+          </div>
+{else}  
+<div id="content">
+<div class="content">
+    <div id="boxesbox">
+       <div id="boxestab">
+        <ul>
+          <li id="boxescurrent"><a href=" ">{#heading_cart#}</a></li>
+        </ul>
+      </div>
+      <div id="boxeswrap">  
+<div id="finalProducts"><table width="100%"  border="0" cellpadding="2" cellspacing="0">
+        <tr>
+          <td class="boxText">{php} echo TEXT_CART_EMPTY;{/php}</td>
+        </tr>
+    </table></div>
+{/if}
+{if $ACTIVATE_GIFT=='true'}
+<!--GV Code Start-->
+{if $GV_AMOUNT neq ''}
+<table width="100%"  border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="48" height="48"><a href="{$LINK_CART}"><img src="{$tpl_path}img/img_gift.gif" width="48" height="48" border="0"></a></td>
+    <td valign="middle">
+    <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+      <tr>
+        <td><img src="{$tpl_path}img/pixel_trans.gif" border="0" alt="" width="100%" height="1"></td>
+      </tr>
+      <tr>
+        <td align="center" class="smalltext">{#voucher_balance#}</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid; border-color: #FFFFFF; background-color: #FCD4D4;"align="center" class="smalltext" valign="bottom"><b><font color="#000000" size="3">{$GV_AMOUNT}</font></b></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+<table cellpadding="0" width="100%" cellspacing="0" border="0">
+  <tr>
+    <td><img src="{$tpl_path}img/pixel_trans.gif" border="0" alt="" width="100%" height="1"></td>
+  </tr>
+</table>
+{/if}
+{if $COUPON_AMOUNT2 neq ''}
+<table cellpadding="0" width="100%" cellspacing="0" border="0">
+  <tr>
+    <td><img src="{$tpl_path}img/pixel_trans.gif" border="0" alt="" width="100%" height="1"></td>
+  </tr>
+  <tr>
+    <td class="smalltext"><div align="center">{#voucher_redeemed#}
+      <br>
+        <b>{$COUPON_AMOUNT2}</b>
+    </div></td>
+  </tr>
+</table>
+{/if}
+
+<!--GV Code End-->
+{/if}
+
+{else}
+{/if}
+</div>
+</div>
+</div>
+</div>

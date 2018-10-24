@@ -1,0 +1,13 @@
+
+親愛的客戶 ,
+
+訂單編號： {$ORDER_NR}
+訂單的處理狀態 : {$ORDER_STATUS}
+
+可點選以下連結,進一步瞭解訂單明細：
+ {$ORDER_LINK}
+
+{if $NOTIFY_COMMENTS}
+備註:{$NOTIFY_COMMENTS}{/if} 
+
+如有任何疑問，請直接回信告訴我們.

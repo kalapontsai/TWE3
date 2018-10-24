@@ -1,0 +1,115 @@
+{config_load file="$language/lang_$language.conf" section="checkout_confirmation"} 
+  <div id="infocontent">
+  <div class="infocontent">
+    <div id="infobox">
+       <div id="infotab">
+        <ul>
+          <li id="infocurrent"><a>{#heading_confirmation#}</a></li>
+        </ul>
+      </div>
+     <div id="infowrap">
+    {if $IP_LOG=='true'} 
+    <div class="text-center">
+    <p><span class="label label-info">{#text_ip#} 
+    <b>
+    <font color="#FF0000">{$CUSTOMERS_IP}</font>
+    </b></span></p>
+    </div>
+  {/if}
+
+<table  class="table table-bordered">
+  <tr> 
+    <td width="50%" valign="top"><span class="label label-default"><strong>{#text_shipping_address#}</strong></span> <em><a class="btn btn-success btn-xs" role="button" href="{$SHIPPING_ADDRESS_EDIT}">{#text_edit#}</a> 
+      </em><br>
+      {$DELIVERY_LABEL}</td>
+    <td valign="top">{if $BILLING_LABEL}<span class="label label-default"><strong>{#text_payment_address#}</strong></span> <em><a class="btn btn-success btn-xs" role="button" href="{$BILLING_ADDRESS_EDIT}">{#text_edit#}</a> 
+      </em><br>
+      {$BILLING_LABEL}{/if}</td>
+  </tr>
+</table>
+
+<div class="ui-widget-content">
+
+{if $SHIPPING_METHOD}<span class="label label-default"><strong>{#text_shipping_method#}</strong></span> <span class="label label-warning">{$SHIPPING_METHOD}</span> <a class="btn  btn-success btn-xs" role="button" href="{$SHIPPING_EDIT}"> <em>{#text_edit#}</em></a></strong><br>{/if}
+<br />
+{if $PAYMENT_METHOD!=''}<span class="label label-default"><strong>{#text_payment_method#}</strong></span> <span class="label label-warning">{$PAYMENT_METHOD}</span> <a class="btn btn-xs btn-success" role="button" href="{$PAYMENT_EDIT}"><em>{#text_edit#}</em></a>{/if}
+</div>
+
+{if $ORDER_COMMENTS!=''}<br /><span class="label label-default"><strong>{#text_comments#}</strong></span><em><a class="btn btn-xs btn-success" role="button" href="{$PAYMENT_EDIT}">{#text_edit#}</a> 
+</em>
+<table class="table table-bordered">
+  <tr> 
+    <td>{$ORDER_COMMENTS}</td>
+  </tr>
+</table></div>
+{/if} 
+{if $PAYMENT_INFORMATION!=''}
+<br />
+<span class="label label-info"><strong>{#text_payment_info#}</strong></span> 
+<table class="table table-bordered">
+  <tr> 
+    <td>{$PAYMENT_INFORMATION}</td>
+  </tr>
+  <tr> 
+    <td>{#text_payment_notice#}</td>
+  </tr>
+</table>
+{/if} 
+<span class="label label-info"><strong>{#text_products#}</strong></span> <em><a class="btn btn-xs btn-success" role="button" href="{$PRODUCTS_EDIT}">{#text_edit#}</a> 
+</em><br>
+<table class="table table-bordered">
+  <tr> 
+    <td> 
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="main">{$PRODUCTS_BLOCK}</td>
+        </tr>
+        <tr>
+          <td style="background:#EEE"><div align="right">{$TOTAL_BLOCK}</div></td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+ <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><div class="btn_replace text-right">{$CHECKOUT_FORM} {if $MODULE_BUTTONS!=''} {$MODULE_BUTTONS}<br>
+        {/if} {$CHECKOUT_BUTTON}</div>
+        <br>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr> 
+            <td> <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                <tr> 
+                  <td width="25%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+                      <tr> 
+                        <td width="50%" align="right"><img src="{$tpl_path}img/pixel_silver.gif" width="1" height="5"></td>
+                        <td width="50%"><img src="{$tpl_path}img/pixel_silver.gif" width="100%" height="1"></td>
+                      </tr>
+                    </table></td>
+		          <td width="25%"><img src="{$tpl_path}img/pixel_silver.gif" width="100%" height="1"></td>
+                    <td width="25%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+                      <tr> 
+                        <td><img src="{$tpl_path}img/pixel_silver.gif" width="100%" height="1"></td>
+                        <td width="1"><img src="{$tpl_path}img/checkout_bullet.gif"></td>
+                        <td><img src="{$tpl_path}img/pixel_silver.gif" width="100%" height="1"></td>
+                      </tr>
+                    </table></td>
+                  <td width="25%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+                      <tr> 
+                        <td width="50%"><img src="{$tpl_path}img/pixel_silver.gif" width="100%" height="1"></td>
+                        <td width="50%"><img src="{$tpl_path}img/pixel_silver.gif" width="1" height="5"></td>
+                      </tr>
+                    </table></td>
+                </tr>
+                <tr> 
+                  <td align="center" width="25%" class="checkoutBarTo">{#text_shipping_info#}</td>
+                  <td align="center" width="25%" class="checkoutBarTo">{#text_payment_info#}</td>
+                  <td align="center" width="25%" class="checkoutBarCurrent">{#text_confirm#}</td>
+                  <td align="center" width="25%" class="checkoutBarTo">{#text_finished#}</td>
+                </tr>
+              </table></td>
+          </tr>
+        </table>
+      </td>
+  </tr>
+</table>
+</div></div></div></div>

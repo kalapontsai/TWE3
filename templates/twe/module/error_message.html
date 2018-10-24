@@ -1,0 +1,23 @@
+{config_load file="$language/lang_$language.conf" section="error_handler"}
+<table class="table">
+  <tr>
+    <td class="main" valign="middle">
+<table  class="table">
+      <tr>
+        <td style="border: 1px solid; border-color:#ff0000;" bgcolor="#FFCCCC"><div class="text-center"><strong><font size="3" face="Verdana, Arial, Helvetica, sans-serif">{$ERROR}</font></strong></div></td>
+      </tr>
+    </table>
+      <br>
+      <h4>{#text_search_again#}</h4>{$FORM_ACTION}
+      <h4><strong>{#text_search#}</strong></h4> 
+      <table width="100%"  border="0" cellpadding="5" cellspacing="0">
+        <tr>
+          <td class="main" width="80%"><div align="left">{$INPUT_SEARCH}</div></td>
+          <td width="20%" class="btn_replace">{$BUTTON_SUBMIT}</td>
+        </tr>
+      </table>
+      <br>
+      <div class="btnreplace text-right">{$BUTTON}</div>
+      </td>
+  </tr>
+</table> </form>

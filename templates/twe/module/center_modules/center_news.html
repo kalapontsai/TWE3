@@ -1,0 +1,22 @@
+<div id="infocontent">
+  <div class="infocontent">
+    <div id="infobox">
+       <div id="infotab">
+        <ul>
+          <li id="infocurrent"><a>{$heading_text}</a></li>
+        </ul>
+      </div>
+     <div id="infowrap">     
+ <table width="100%" border="0" cellspacing="2" cellpadding="0">
+        {foreach name=aussen item=module_data from=$module_content}
+          <tr>
+            <td valign="top" class="main"><img src="{$tpl_path}img/world2.png"border="0"></td>
+              <td class="main"><a href="{$module_data.LINK}">&nbsp;{$module_data.NAME}</a>
+                <a href="{$module_data.LINK}">&nbsp;<strong>[<strong>{$module_data.MORE}</strong>]</strong></a>
+                {$module_data.LAST_TIME}&nbsp;&nbsp;{$module_data.VIEWED}</td>
+			    </tr> {/foreach}               
+              </table>
+  </div>
+</div>
+</div>
+</div>

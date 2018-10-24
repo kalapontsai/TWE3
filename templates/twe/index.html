@@ -1,0 +1,190 @@
+﻿{config_load file="$language/lang_$language.conf" section="index"}
+{config_load file="$language/lang_$language.conf" section="boxes"} 
+{config_load file="$language/lang_$language.conf" section="account"}
+
+    <div class="container-fluid">
+<div class="header-navbar">
+   <div class="row top-header">
+           <div class="col-xs-2 col-sm-2 col-md-2 text-center">
+            <div class="logo">
+            <a href="{$default}"><img src="images/banner/{$logo}" border="0"></a>
+            </div>
+           </div>
+     <div class="col-xs-10 col-sm-10 col-md-10">
+       <div id="stickytop-nav" class="top-nav text-center">
+       {if $logoff}
+                    <div class="dropdown btn-group  hidden-xs hidden-sm"> 
+                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="{$account}"><span class="glyphicon glyphicon-user"></span>{#link_account#}<span class="caret"></span></a>  
+                        <ul class="dropdown-menu dropdown-menu-account dropdown-menu-right" role="menu">
+                        <li role="presentation"><a role="menuitem" href="{$LINK_EDIT}">{#text_edit#}</a></li>
+                        <li role="presentation"><a role="menuitem" href="{$LINK_ADDRESS}">{#text_address#}</a></li>
+                        <li role="presentation"><a role="menuitem" href="{$LINK_PASSWORD}">{#text_password#}</a></li>
+                        <li role="presentation"><a role="menuitem" href="{$LINK_ORDERS}">{#text_orders#}</a></li>
+                        <li role="presentation"><a role="menuitem" href="{$LINK_NEWSLETTER}">{#text_newsletter#}</a></li>
+                        <li><a role="button" href="{$logoff}"><span class="glyphicon glyphicon-log-out"> {#link_logoff#}</span></a></li>
+                        </ul>
+                    </div>
+                    {else}         
+                    <div class="dropdown btn-group hidden-xs hidden-sm">
+                <a href="{$login}" id="login" data-toggle="dropdown" class="btn dropdown-toggle"><span class="glyphicon glyphicon-log-in"> {#link_login#}</span></a>
+                <ul class="dropdown-menu dropdown-menu-login dropdown-menu-right" role="menu" aria-labelledby="login">
+                <form role="form" name="login" method="post" action="login.php?action=process">
+                  <div class="form-group">
+                  <input type="text" placeholder="{php} echo ENTRY_EMAIL_ADDRESS;{/php}" name="email_address" class="form-control input-sm">
+                  </div>
+                  <div class="input-group">
+                  <input type="password" class="form-control input-sm" name="password" placeholder="{php}echo ENTRY_PASSWORD; {/php}">
+                    <span class="input-group-btn">
+                  <button type="submit" title="" class="btn btn-default input-sm" role="button"><span class="glyphicon glyphicon-log-in"></span></button>
+                  </span>
+                  </div>
+                  <a class="btn btn-group" role="button" href="password_forgotten.php">{#text_password_forgotten#}</a>
+                  <a class="btn btn-group" role="button" href="create_account.php">{#text_create_account#}</a>
+                  </form>
+                </ul>
+              </div>              
+             {/if}         <div class="visible-xs-inline-block visible-sm-inline-block dropdown btn-group">
+              <a class="btn dropdown-toggle" type="button" id="SiteMap" data-toggle="dropdown"><span class="glyphicon glyphicon-th-list"></span> {#center_categories#}</a>
+              <ul class="dropdown-menu dropdown-menu-sitemap dropdown-menu-right scrollable-menu" role="menu" aria-labelledby="SiteMap">
+                <div class="sitemap">{php}include('includes/modules/sitemap.php');{/php}</div>
+              </ul>
+           </div>  
+            
+        {if !strstr($smarty.server.PHP_SELF, 'checkout')} 
+    		{if !strstr($smarty.server.PHP_SELF, 'shopping_cart')}
+             <div class="dropdown btn-group">
+                <a class="btn dropdown-toggle" href="{$cart}"  type="button" id="cart" title="{#show_cart#}" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-shopping-cart"></span>
+                <span class="cart_subtotal"><span class="amount">{$amount}</span></span>
+                <span class="cart_itemstotal"><span id="cart_total">({$cart_total})</span></span>
+               </a>
+                <ul class="dropdown-menu dropdown-menu-cart dropdown-menu-right scrollable-menu" role="menu" aria-labelledby="cart">
+                  <div id="tinycart">{php}include(DIR_WS_INCLUDES . 'buynow/getCartBoxlist.php');{/php}</div>
+                </ul>
+             </div>
+            {/if} 
+            {/if}
+            </div>
+          </div><!-- class="col-md-10"--> 
+          <div class="ajaxBreadcrumb hidden-xs hidden-sm"><div id="ajaxBreadcrumb">{$navtrail}</div></div>
+    {if $sbox_box}
+      {foreach name=aussen item=box_data from=$sbox_box}
+	{eval var=$box_data.BOXES}
+	{/foreach}
+    {/if}
+   </div><!-- class="header-navbar--> 
+ </div><!-- row top-header--> 
+
+<div id="notification"></div>
+
+<div id="index_content">
+<div class="container{$FLUID}"  style="background-color:#FFF"> 
+  <div class="row{$FLUID}">
+  
+  {if !strstr ($smarty.server.PHP_SELF, 'checkout')}{if $1box_box}
+    <div class="col-md-{$LEFT} visible-md-block visible-lg-block">
+      {foreach name=aussen item=box_data from=$1box_box}
+       <div class="row-fluid"> 
+	{eval var=$box_data.BOXES}
+    </div>
+	{/foreach}
+    </div>
+    {/if}
+    {/if}
+     {if $1box_box || $rbox_box}<div class="col-md-{$CENTER}">{/if}
+          <div class="row-fluid"> 
+          {$off_tab_content}{$main_content}<br />
+          </div>
+     {if $1box_box || $rbox_box}</div>{/if}
+   
+       
+    {if !strstr ($smarty.server.PHP_SELF, 'checkout')}
+        {if $rbox_box}
+    <div class="col-md-{$RIGHT} visible-md-block visible-lg-block">
+      {foreach name=aussen item=box_data from=$rbox_box}
+       <div class="row-fluid"> 
+	{eval var=$box_data.BOXES}
+    </div>
+	{/foreach}
+    </div>
+    {/if}
+    {/if}
+  </div>
+</div>
+
+<div class="navbar-fixed-bottom  mobile-footer visible-xs-block visible-sm-block">
+    <div class="container-fluid">  
+        <div class="row">
+        <div class="btn-group btn-group-justified">
+        <div class="dropdown btn-group"> 
+        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-info-sign"></span> {#text_content#} <span class="caret"></span></a>  
+            <ul class="dropdown-menu dropdown-menu-account dropdown-menu-left" role="menu">
+            {php}include(DIR_WS_MODULES . 'load_content.php');{/php}
+            </ul>
+        </div><!--class="dropdown"--> 
+        {if $logoff}
+                    <div class="dropdown btn-group"> 
+                    <a class="btn btn-group btn-default dropdown-toggle" data-toggle="dropdown" href="{$account}"><span class="glyphicon glyphicon-user"></span>{#link_account#}<span class="caret"></span></a>  
+                        <ul class="dropdown-menu dropdown-menu-account dropdown-menu-right" role="menu">
+                        <li role="presentation"><a role="menuitem" href="{$LINK_EDIT}">{#text_edit#}</a></li>
+                        <li role="presentation"><a role="menuitem" href="{$LINK_ADDRESS}">{#text_address#}</a></li>
+                        <li role="presentation"><a role="menuitem" href="{$LINK_PASSWORD}">{#text_password#}</a></li>
+                        <li role="presentation"><a role="menuitem" href="{$LINK_ORDERS}">{#text_orders#}</a></li>
+                        <li role="presentation"><a role="menuitem" href="{$LINK_NEWSLETTER}">{#text_newsletter#}</a></li>
+                        <li><a role="button" href="{$logoff}"><span class="glyphicon glyphicon-log-out"> {#link_logoff#}</span></a></li>
+                        </ul>
+                    </div>
+                    {else}
+              <div class="dropdown btn-group">
+                <a href="{$login}" id="login" data-toggle="dropdown" class="btn btn-group btn-default  dropdown-toggle"><span class="glyphicon glyphicon-log-in"> {#link_login#}</span></a>
+                <ul class="dropdown-menu dropdown-menu-login dropdown-menu-right" role="menu" aria-labelledby="login">
+                <form role="form" name="login" method="post" action="login.php?action=process">
+                  <div class="form-group">
+                  <input type="text" placeholder="{php} echo ENTRY_EMAIL_ADDRESS;{/php}" name="email_address" class="form-control input-sm">
+                  </div>
+                  <div class="input-group">
+                  <input type="password" class="form-control input-sm" name="password" placeholder="{php}echo ENTRY_PASSWORD; {/php}">
+                    <span class="input-group-btn">
+                  <button type="submit" title="" class="btn btn-default input-sm" role="button"><span class="glyphicon glyphicon-log-in"></span></button>
+                  </span>
+                  </div>
+                  <a class="btn btn-group" role="button" href="password_forgotten.php">{#text_password_forgotten#}</a>
+                  <a class="btn btn-group" role="button" href="create_account.php">{#text_create_account#}</a>
+                  </form>
+                </ul>
+              </div>
+             {/if}
+       <div class="dropdown btn-group">
+            <a class="btn btn-default dropdown-toggle" type="button" id="mobilecontent" data-toggle="dropdown"><span class="glyphicon glyphicon-search"></span> 商品目錄</a>
+            <ul class="dropdown-menu dropdown-menu-account dropdown-menu-left" role="menu">
+             <li role="presentation"><a role="menuitem" href="https://shop.elhomeo.com/index.php?cPath=2">單方糖球</a></li>
+             <li role="presentation"><a role="menuitem" href="https://shop.elhomeo.com/index.php?cPath=3">12組織鹽</a></li>
+             <li role="presentation"><a role="menuitem" href="https://shop.elhomeo.com/index.php?cPath=4">糖球組</a></li>
+             <li role="presentation"><a role="menuitem" href="https://shop.elhomeo.com/index.php?cPath=1">油膏</a></li>
+             <li role="presentation"><a role="menuitem" href="https://shop.elhomeo.com/index.php?cPath=5">12組織鹽複方</a></li>
+             <li role="presentation"><a role="menuitem" href="https://shop.elhomeo.com/index.php?cPath=10">常用複方</a></li>
+             <li role="presentation"><a role="menuitem" href="https://shop.elhomeo.com/index.php?cPath=11">紙盒, 代購服務</a></li>            
+             </ul>
+       </div>
+            </div><!-- class="btn-group btn-group-justified-->
+        </div>
+    </div>
+</div>
+
+</div><!-- id="index_content"-->  
+ 		<div class="row visible-xs-block">
+          <div class="text-center"><font size="1">{#text_footer#}</font><br /><div class="banner thumbnail text-center" style="margin-bottom:35px">{$BANNER}</div></div>
+          
+         </div>
+         <div class="row visible-sm-block visible-md-block visible-lg-block">
+          <div class="text-center"><font size="1">{#text_footer#}</font><br /><div class="banner thumbnail text-center">{$BANNER}</div></div>
+          
+         </div>
+         
+</div>
+
+</body>
+{php}
+  include_once('includes/google_analyze.inc');
+{/php}
+</html>

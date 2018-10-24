@@ -1,0 +1,60 @@
+﻿會員帳號: {$csACC} 
+訂單編號: {$oID}
+訂單日期: {$DATE}
+-----------------------------------------------------------------
+{if $COMMENTS}
+您的購物意見:
+{$COMMENTS}
+{/if}
+
+您的訂單商品列表
+-----------------------------------------------------------------
+{foreach name=aussen item=order_values from=$order_data} 
+[ {$order_values.PRODUCTS_QTY} ] x [ {$order_values.PRODUCTS_NAME} ] ----- {$order_values.PRODUCTS_PRICE}
+{if $order_values.PRODUCTS_ATTRIBUTES !=''}{$order_values.PRODUCTS_ATTRIBUTES}{/if}
+
+{/foreach}
+
+{foreach name=aussen item=order_total_values from=$order_total}
+{$order_total_values.TITLE}{$order_total_values.TEXT}
+{/foreach}
+
+
+出貨地址 
+-----------------------------------------------------------------
+{$address_label_shipping}
+
+
+{if $PAYMENT_METHOD}
+付款方式: {$PAYMENT_METHOD}
+{$PAYMENT_INFORMATION}{/if}
+
+[交易注意事項]
+*下單後請在三天內完成匯款，並填寫匯款通知，以便我們在最短的時間內為您出貨，若您有特殊狀況請來信告知，我們將為您保留訂單。
+*如果超過10天仍未匯款時，將取消您的訂單。
+*我們會於收到匯款通知時立刻與您聯絡,並於隔日出貨(不含例假日)。
+-----------------------------------------------------------------
+[糖球注意事項]
+順勢糖球的原料, 是以酒精經過震盪稀釋而成的液態酊劑,
+再將酊劑滴入糖球中, 故初期打開時呈現潮濕狀以及酒精氣味,
+屬正常情況, 仍可直接使用, 氣味會在使用後幾天內揮發. 
+
+台灣天氣潮濕,小糖球保存除了勿靠近幅射強的電器外, 
+避免強烈香味或濃的氣味如香水、口香糖、牙膏等。 
+也要注意防潮,儘量放在冷氣房及密封鋁箔袋中 !!
+-----------------------------------------------------------------
+
+謝謝您的惠顧!!
+
+匯款通知: https://shop.elhomeo.com/shop_content.php?coID=7&cID={$cID}&oID={$oID}
+
+訂單最新狀況: https://shop.elhomeo.com/account_history_info.php?order_id={$oID}
+
+若有任何線上服務問題，請直接 email 給我們 : service@elhomeo.com
+與 台端個人資料之收集與處理規定,係遵守法務部個人資料保護法之相關規定。
+詳細內容請參考本公司網址 : https://shop.elhomeo.com/shop_content.php?coID=2
+
+艾沙順勢糖球屋
+網    址 http://www.elhomeo.com
+討論區 http://forum.elhomeo.com
+購物車 http://shop.elhomeo.com

@@ -1,0 +1,35 @@
+#git add -f <file> 強制加入忽略的檔案
+#$ git clean -fX 清除忽略的檔案
+# /目錄 忽略底下所有檔案
+
+*sublime*
+.ftpquota
+.htaccess
+.well-known/
+modify_note/
+templates_c/
+forum/
+export/
+download/
+cache/
+images/
+ext/
+pub/
+media/products/
+admin/backups/
+admin/images/
+admin/phpMyAdmin/
+admin/rss/
+admin/configuration.php
+google*.*
+*.log
+*.ico
+*.orig
+*.bak
+sitemap*.*
+robots.txt
+error_log
+blacklist.dat
+templates/twe/img/
+includes/configure*.*
+includes/google_analyze.inc
