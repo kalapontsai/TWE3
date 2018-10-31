@@ -21,6 +21,7 @@ admin/images/
 admin/phpMyAdmin/
 admin/rss/
 admin/configuration.php
+admin/includes/configure.php
 google*.*
 *.log
 *.ico
@@ -33,3 +34,4 @@ blacklist.dat
 templates/twe/img/
 includes/configure*.*
 includes/google_analyze.inc
+config*.*
