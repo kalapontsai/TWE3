@@ -1,5 +1,7 @@
 <?php
-/* --------------------------------------------------------------
+/* 
+   20190306 add customer_status by ELHOMEO Kadela
+   --------------------------------------------------------------
    $Id: stats_customers.php,v 1.1 2003/12/19 13:19:08 oldpa   Exp $   
 
    TWE-Commerce - community made shopping
@@ -19,4 +21,5 @@ define('HEADING_TITLE', '客戶購物排行榜');
 define('TABLE_HEADING_NUMBER', '編號');
 define('TABLE_HEADING_CUSTOMERS', '客戶名稱');
 define('TABLE_HEADING_TOTAL_PURCHASED', '購物金額總計');
+define('TABLE_HEADING_CUSTOMER_STATUS','客戶等級');
 ?>

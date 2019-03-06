@@ -46,7 +46,7 @@
 
 謝謝您的惠顧!!
 
-匯款通知: https://shop.elhomeo.com/shop_content.php?coID=7&cID={$cID}&oID={$oID}
+匯款通知(需先登入): https://shop.elhomeo.com/shop_content.php?coID=7&cID={$cID}&oID={$oID}
 
 訂單最新狀況: https://shop.elhomeo.com/account_history_info.php?order_id={$oID}
 

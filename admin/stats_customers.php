@@ -1,5 +1,7 @@
 <?php
-/* --------------------------------------------------------------
+/* 
+  20190306 add customer_status check by ELHOMEO Kadela
+--------------------------------------------------------------
    $Id: stats_customers.php,v 1.3 2004/02/29 17:05:18 oldpa Exp $   
 
    TWE-Commerce - community made shopping   
@@ -61,6 +63,8 @@
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_NUMBER; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CUSTOMERS; ?></td>
+<!-- 20190306 add customer status check -->
+                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CUSTOMER_STATUS; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_TOTAL_PURCHASED; ?>&nbsp;</td>
               </tr>
 <?php
@@ -68,7 +72,7 @@
   $customers_query_numrows_query = "select customers_id from " . TABLE_ORDERS . " group by customers_id";
   $customers_query_numrows = $db->Execute($customers_query_numrows_query);
 
-  $customers_query_raw = "select c.customers_firstname, c.customers_lastname, sum(op.final_price) as ordersum from " . TABLE_CUSTOMERS . " c, " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where c.customers_id = o.customers_id and o.orders_id = op.orders_id group by c.customers_firstname, c.customers_lastname order by ordersum DESC";
+  $customers_query_raw = "select c.customers_firstname, c.customers_lastname, c.customers_status, sum(op.final_price) as ordersum from " . TABLE_CUSTOMERS . " c, " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where c.customers_id = o.customers_id and o.orders_id = op.orders_id group by c.customers_firstname, c.customers_lastname order by ordersum DESC";
   $customers_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $customers_query_raw, $customers_query_numrows);
   
   $customers = $db->Execute($customers_query_raw);
@@ -78,10 +82,21 @@
     if (strlen($rows) < 2) {
       $rows = '0' . $rows;
     }
+/* 20190306 add customer status check 
+   total order sum > 40000, the stauts should be 3 whom is 'VIP' in table customer_status
+*/
+    if (($customers->fields['ordersum'] >= 40000) and ($customers->fields['customers_status'] != '3')) {
+      $customers_status = '!!!!!';
+    } else {
+      $customers_status = '-';
+    }
+/* 20190306 add customer status check */
 ?>
               <tr class="dataTableRow" onmouseover="this.className='dataTableRowOver';this.style.cursor='hand'" onmouseout="this.className='dataTableRow'" onclick="document.location.href='<?php echo twe_href_link(FILENAME_CUSTOMERS, 'search=' . $customers->fields['customers_lastname'], 'NONSSL'); ?>'">
                 <td class="dataTableContent"><?php echo $rows; ?>.</td>
                 <td class="dataTableContent"><?php echo '<a href="' . twe_href_link(FILENAME_CUSTOMERS, 'search=' . $customers->fields['customers_firstname'], 'NONSSL') . '">' . $customers->fields['customers_firstname'] . ' ' . $customers->fields['customers_lastname'] . '</a>'; ?></td>
+                <!-- 20190306 add customer member flag -->
+                <td class="dataTableContent"><?php echo $customers_status; ?></td>
                 <td class="dataTableContent" align="right"><?php echo $currencies->format($customers->fields['ordersum']); ?>&nbsp;</td>
               </tr>
 <?php
